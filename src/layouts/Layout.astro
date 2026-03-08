@@ -12,7 +12,7 @@ const { title = "My Portfolio" } = Astro.props;
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width" />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/favicon.png" />
         <meta name="generator" content={Astro.generator} />
         <title>{title}</title>
     </head>
@@ -22,11 +22,9 @@ const { title = "My Portfolio" } = Astro.props;
             const anchors = document.querySelectorAll('a[href^="#"]');
             
             anchors.forEach(anchor => {
-                // 💡 function (e) をアロー関数 (e) => に変更
                 anchor.addEventListener('click', (e) => {
                     e.preventDefault(); 
                     
-                    // 💡 this の代わりに、上のforEachで使っている anchor を直接使います！
                     const targetId = anchor.getAttribute('href');
                     if (!targetId || targetId === '#') return;
                     
