@@ -1,11 +1,66 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import '../styles/global.css';
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="My Portfolio">
+  <main class="min-h-screen bg-slate-900 text-white p-8 md:p-16">
+    
+    <section class="flex flex-col items-center justify-center py-20 text-center">
+      <h1 class="text-5xl md:text-7xl font-bold mb-4 tracking-tight">
+        Hello, I'm <span class="text-cyan-400">Your Name</span>
+      </h1>
+      <p class="text-xl text-slate-300 mb-8">
+        Software Engineer | Backend, Frontend & Infrastructure
+      </p>
+      <div class="flex gap-4">
+        <a href="#works" class="bg-cyan-600 hover:bg-cyan-500 px-6 py-3 rounded-lg font-semibold transition-colors duration-300">
+          Works (実績)
+        </a>
+        <a href="https://github.com/" target="_blank" class="border border-slate-500 hover:border-white px-6 py-3 rounded-lg font-semibold transition-colors duration-300">
+          GitHub
+        </a>
+      </div>
+    </section>
+
+    <section class="max-w-4xl mx-auto py-16 border-t border-slate-800">
+      <h2 class="text-3xl font-bold mb-8 text-cyan-400">Skills</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+        <div class="bg-slate-800 p-6 rounded-xl">
+          <h3 class="text-xl font-semibold mb-3 text-white">Backend</h3>
+          <p class="text-slate-400 leading-relaxed">
+            Go, Python, Node.jsなどを利用したAPI開発、マイクロサービスアーキテクチャの設計・実装経験があります。
+          </p>
+        </div>
+
+        <div class="bg-slate-800 p-6 rounded-xl">
+          <h3 class="text-xl font-semibold mb-3 text-white">Frontend</h3>
+          <p class="text-slate-400 leading-relaxed">
+            React / Next.js を用いたモダンなUI構築。UI/UXを意識したコンポーネント設計が可能です。
+          </p>
+        </div>
+
+        <div class="bg-slate-800 p-6 rounded-xl">
+          <h3 class="text-xl font-semibold mb-3 text-white">Infrastructure</h3>
+          <p class="text-slate-400 leading-relaxed">
+            AWS / GCP を用いたインフラ構築、Docker / CI/CDパイプラインの整備など、DevOps領域も担当しています。
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="works" class="max-w-4xl mx-auto py-16 border-t border-slate-800">
+      <h2 class="text-3xl font-bold mb-8 text-cyan-400">Works</h2>
+      <div class="bg-slate-800 p-6 rounded-xl mb-6 hover:bg-slate-700 transition-colors duration-300">
+        <h3 class="text-2xl font-bold mb-2">自社プロダクトのフルリプレイス</h3>
+        <p class="text-sm text-cyan-300 mb-4">Go / React / AWS</p>
+        <p class="text-slate-300">
+          レガシーシステムからモダンアーキテクチャへの移行プロジェクト。バックエンドのAPI設計からインフラ構築、フロントエンドの一部実装まで横断的にリードしました。
+        </p>
+      </div>
+    </section>
+
+  </main>
 </Layout>
