@@ -1,66 +1,161 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import '../styles/global.css';
+import { Image } from 'astro:assets';
+import profileIcon from '../img/profile_icon.png';
 ---
 
 <Layout title="My Portfolio">
-  <main class="min-h-screen bg-slate-900 text-white p-8 md:p-16">
-    
-    <section class="flex flex-col items-center justify-center py-20 text-center">
-      <h1 class="text-5xl md:text-7xl font-bold mb-4 tracking-tight">
-        Hello, I'm <span class="text-cyan-400">Your Name</span>
-      </h1>
-      <p class="text-xl text-slate-300 mb-8">
-        Software Engineer | Backend, Frontend & Infrastructure
-      </p>
-      <div class="flex gap-4">
-        <a href="#works" class="bg-cyan-600 hover:bg-cyan-500 px-6 py-3 rounded-lg font-semibold transition-colors duration-300">
-          Works (実績)
-        </a>
-        <a href="https://github.com/" target="_blank" class="border border-slate-500 hover:border-white px-6 py-3 rounded-lg font-semibold transition-colors duration-300">
-          GitHub
-        </a>
-      </div>
-    </section>
-
-    <section class="max-w-4xl mx-auto py-16 border-t border-slate-800">
-      <h2 class="text-3xl font-bold mb-8 text-cyan-400">Skills</h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+  <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200 relative">
+      <div class="max-w-4xl mx-auto px-6 py-3 flex justify-between items-center">
         
-        <div class="bg-slate-800 p-6 rounded-xl">
-          <h3 class="text-xl font-semibold mb-3 text-white">Backend</h3>
-          <p class="text-slate-400 leading-relaxed">
-            Go, Python, Node.jsなどを利用したAPI開発、マイクロサービスアーキテクチャの設計・実装経験があります。
-          </p>
-        </div>
+        <a href="#home" class="flex items-center group">
+          <Image 
+            src={profileIcon} 
+            alt="Yu Kasai Profile Icon" 
+            class="h-12 w-12 rounded-full border-2 border-[#556b2f] object-cover shadow-sm group-hover:scale-105 transition-transform duration-300"
+          />
+        </a>
 
-        <div class="bg-slate-800 p-6 rounded-xl">
-          <h3 class="text-xl font-semibold mb-3 text-white">Frontend</h3>
-          <p class="text-slate-400 leading-relaxed">
-            React / Next.js を用いたモダンなUI構築。UI/UXを意識したコンポーネント設計が可能です。
-          </p>
-        </div>
+        <nav class="hidden md:flex gap-1 md:gap-2 text-sm font-medium text-slate-600">
+          <a href="#home" class="px-4 py-2 rounded-lg hover:text-[#556b2f] hover:bg-[#556b2f]/10 transition-all duration-300">Home</a>
+          <a href="#about" class="px-4 py-2 rounded-lg hover:text-[#556b2f] hover:bg-[#556b2f]/10 transition-all duration-300">About</a>
+          <a href="#skills" class="px-4 py-2 rounded-lg hover:text-[#556b2f] hover:bg-[#556b2f]/10 transition-all duration-300">Skills</a>
+          <a href="#contact" class="px-4 py-2 rounded-lg hover:text-[#556b2f] hover:bg-[#556b2f]/10 transition-all duration-300">Contact</a>
+        </nav>
 
-        <div class="bg-slate-800 p-6 rounded-xl">
-          <h3 class="text-xl font-semibold mb-3 text-white">Infrastructure</h3>
-          <p class="text-slate-400 leading-relaxed">
-            AWS / GCP を用いたインフラ構築、Docker / CI/CDパイプラインの整備など、DevOps領域も担当しています。
-          </p>
-        </div>
+        <button id="mobile-menu-btn" class="md:hidden p-2 text-slate-600 hover:text-[#556b2f] focus:outline-none">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
 
+      <div id="mobile-menu" class="md:hidden absolute top-full left-0 w-full bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-lg transition-all duration-300 ease-out opacity-0 -translate-y-4 pointer-events-none">
+        <nav class="flex flex-col text-center text-sm font-medium text-slate-600 py-4">
+          <a href="#home" class="mobile-link py-3 hover:text-[#556b2f] hover:bg-slate-50 transition-colors">Home</a>
+          <a href="#about" class="mobile-link py-3 hover:text-[#556b2f] hover:bg-slate-50 transition-colors">About</a>
+          <a href="#skills" class="mobile-link py-3 hover:text-[#556b2f] hover:bg-slate-50 transition-colors">Skills</a>
+          <a href="#contact" class="mobile-link py-3 hover:text-[#556b2f] hover:bg-slate-50 transition-colors">Contact</a>
+        </nav>
+      </div>
+    </header>
+
+  <main class="bg-slate-50 text-slate-800 font-sans">
+    
+    <section id="home" class="min-h-screen flex flex-col items-center justify-center py-20 text-center px-4 -mt-16">
+      
+      <Image 
+        src={profileIcon} 
+        alt="Yu Kasai Profile" 
+        class="w-40 h-40 md:w-48 md:h-48 rounded-full border-4 border-white shadow-xl object-cover mb-8 ring-4 ring-[#556b2f]/20 animate-fade-in-up"
+      />
+
+      <h1 class="text-[5.5vw] sm:text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-slate-900 mb-4 flex items-center justify-center h-[1.2em] whitespace-nowrap">
+        <span>
+          <span id="type-text-1"></span>
+          <span id="type-text-2" class="text-[#556b2f]"></span>
+        </span>
+        <span class="inline-block w-[3px] md:w-[6px] h-[1em] bg-[#556b2f] animate-pulse ml-1 md:ml-2"></span>
+      </h1>
+      
+      <div class="mt-16 md:mt-24">
+        <a href="#about" class="flex flex-col items-center gap-2 text-slate-400 hover:text-[#556b2f] transition-colors duration-300 group">
+          <svg class="w-6 h-6 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </a>
       </div>
     </section>
 
-    <section id="works" class="max-w-4xl mx-auto py-16 border-t border-slate-800">
-      <h2 class="text-3xl font-bold mb-8 text-cyan-400">Works</h2>
-      <div class="bg-slate-800 p-6 rounded-xl mb-6 hover:bg-slate-700 transition-colors duration-300">
-        <h3 class="text-2xl font-bold mb-2">自社プロダクトのフルリプレイス</h3>
-        <p class="text-sm text-cyan-300 mb-4">Go / React / AWS</p>
-        <p class="text-slate-300">
-          レガシーシステムからモダンアーキテクチャへの移行プロジェクト。バックエンドのAPI設計からインフラ構築、フロントエンドの一部実装まで横断的にリードしました。
+    <section id="about" class="max-w-4xl mx-auto py-20 px-6 border-t border-slate-200">
+      <h2 class="text-3xl font-bold mb-8 text-[#556b2f]">About Me</h2>
+      <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
+        <p class="text-slate-600 leading-relaxed mb-8">
+          バックエンドからインフラ、フロントエンドまで幅広く手がけるソフトウェアエンジニアです。
+          技術を通じて、使いやすく、かつ保守性の高いシステムの設計・開発を心がけています。
         </p>
+        
+        <div class="flex flex-wrap gap-4">
+          <a href="https://github.com/yu-kasai0929" target="_blank" class="flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white px-6 py-3 rounded-lg font-medium transition-colors shadow-sm">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd" /></svg>
+            GitHub
+          </a>
+          <a href="https://zenn.dev/shichimi0929" target="_blank" class="flex items-center gap-2 bg-[#3EA8FF] hover:bg-[#2b95ec] text-white px-6 py-3 rounded-lg font-medium transition-colors shadow-sm">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M16.142 16.795L24 10.957v5.52l-7.466 5.522H10.15l7.001-5.204zm-8.284.41L0 23.087V17.57l7.467-5.523h6.381l-5.99 4.444zM16.142 7.205L24 13.043v-5.52L16.534 2h-6.384l7.001 5.204zm-8.284-.41L0 .913v5.52L7.467 11.95h6.381l-5.99-4.444z"/></svg>
+            Zenn
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills" class="max-w-4xl mx-auto py-20 px-6 border-t border-slate-200">
+      <h2 class="text-3xl font-bold mb-8 text-[#556b2f]">Skills</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
+          <h3 class="text-xl font-semibold mb-3 text-slate-800">Backend</h3>
+          <p class="text-slate-600 leading-relaxed">
+            Go, Python, Node.jsなどを利用したAPI開発、アーキテクチャ設計。
+          </p>
+        </div>
+        <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
+          <h3 class="text-xl font-semibold mb-3 text-slate-800">Frontend</h3>
+          <p class="text-slate-600 leading-relaxed">
+            React / Next.js / Astro を用いたモダンなUI構築。
+          </p>
+        </div>
+        <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
+          <h3 class="text-xl font-semibold mb-3 text-slate-800">Infrastructure</h3>
+          <p class="text-slate-600 leading-relaxed">
+            AWS / GCPを用いたインフラ構築、Docker、CI/CDパイプラインの整備。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="max-w-4xl mx-auto py-20 px-6 border-t border-slate-200">
+      <h2 class="text-3xl font-bold mb-8 text-[#556b2f] text-center">Contact</h2>
+      <div class="bg-white p-8 md:p-10 rounded-2xl shadow-sm border border-slate-100 max-w-2xl mx-auto">
+        <p class="text-slate-600 mb-8 text-center">
+          お仕事のご相談やカジュアルな情報交換など、お気軽にご連絡ください。<br>
+          以下のフォームよりメッセージをお送りいただけます。
+        </p>
+
+        <form action="https://api.web3forms.com/submit" method="POST" class="flex flex-col gap-6">
+          <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
+          
+          <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+
+          <div>
+            <label for="name" class="block text-sm font-medium text-slate-700 mb-2">お名前</label>
+            <input type="text" name="name" id="name" required placeholder="山田 太郎" 
+              class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#556b2f]/50 focus:border-[#556b2f] transition-colors bg-slate-50 focus:bg-white" />
+          </div>
+
+          <div>
+            <label for="email" class="block text-sm font-medium text-slate-700 mb-2">メールアドレス</label>
+            <input type="email" name="email" id="email" required placeholder="taro@example.com" 
+              class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#556b2f]/50 focus:border-[#556b2f] transition-colors bg-slate-50 focus:bg-white" />
+          </div>
+
+          <div>
+            <label for="message" class="block text-sm font-medium text-slate-700 mb-2">メッセージ</label>
+            <textarea name="message" id="message" rows="5" required placeholder="こんにちは！ポートフォリオを拝見しました..." 
+              class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#556b2f]/50 focus:border-[#556b2f] transition-colors bg-slate-50 focus:bg-white resize-none"></textarea>
+          </div>
+
+          <button type="submit" class="w-full bg-[#556b2f] hover:bg-[#435525] text-white px-8 py-4 rounded-lg font-semibold transition-colors duration-300 shadow-sm mt-2 flex justify-center items-center gap-2 group">
+            メッセージを送信する
+            <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+            </svg>
+          </button>
+        </form>
+
       </div>
     </section>
 
   </main>
 </Layout>
+
+<script src="../scripts/global.js"></script>
