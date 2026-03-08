@@ -1,8 +1,8 @@
 const el1 = document.getElementById('type-text-1');
 const el2 = document.getElementById('type-text-2');
 
+// タイピングアニメーション
 if (el1 && el2) {
-  // 💡 表示したい文章のリスト（normal: 黒い文字, highlight: 緑色になる文字）
   const phrases = [
     { normal: "Hello, I'm ", highlight: "Yu Kasai" },
     { normal: "I am a ", highlight: "Backend Engineer" },
@@ -20,44 +20,35 @@ if (el1 && el2) {
     const currentPhrase = phrases[phraseIndex];
 
     if (isDeleting) {
-      // 【バックスペースで消す時の動き】
       if (charIndexHighlight > 0) {
-        // まず緑色の文字から消していく
         charIndexHighlight--;
         el2.textContent = currentPhrase.highlight.substring(0, charIndexHighlight);
-        setTimeout(typeFullSentence, 30); // 消すスピード（ダダダッと早く）
+        setTimeout(typeFullSentence, 30);
       } else if (charIndexNormal > 0) {
-        // 緑色が消え終わったら、黒い文字を消していく
         charIndexNormal--;
         el1.textContent = currentPhrase.normal.substring(0, charIndexNormal);
-        setTimeout(typeFullSentence, 30); // 消すスピード
+        setTimeout(typeFullSentence, 30);
       } else {
-        // 全部消え終わったら、次の文章のタイピングへ！
         isDeleting = false;
         phraseIndex = (phraseIndex + 1) % phrases.length;
-        setTimeout(typeFullSentence, 500); // 次を打ち始める前の「間（ま）」
+        setTimeout(typeFullSentence, 500);
       }
     } else {
-      // 【タイピングして打つ時の動き】
       if (charIndexNormal < currentPhrase.normal.length) {
-        // まず黒い文字を打つ
         charIndexNormal++;
         el1.textContent = currentPhrase.normal.substring(0, charIndexNormal);
-        setTimeout(typeFullSentence, 60); // 打つスピード
+        setTimeout(typeFullSentence, 60);
       } else if (charIndexHighlight < currentPhrase.highlight.length) {
-        // 次に緑色の文字を打つ
         charIndexHighlight++;
         el2.textContent = currentPhrase.highlight.substring(0, charIndexHighlight);
-        setTimeout(typeFullSentence, 80); // 強調部分は少しタメて打つ
+        setTimeout(typeFullSentence, 80);
       } else {
-        // 全文を打ち終わったら、読ませるために一時停止してから消し始める
         isDeleting = true;
-        setTimeout(typeFullSentence, 2500); // 完成した文章を表示しておく時間（2.5秒）
+        setTimeout(typeFullSentence, 2500);
       }
     }
   }
 
-  // 画像がフワッと出終わる頃にアニメーション開始
   setTimeout(typeFullSentence, 800);
 }
 
@@ -67,17 +58,88 @@ const menu = document.getElementById('mobile-menu');
 const links = document.querySelectorAll('.mobile-link');
 
 if (btn && menu) {
-  // ボタンをクリックしたら、透明度・位置・クリック判定を切り替える
   btn.addEventListener('click', () => {
     menu.classList.toggle('opacity-0');
     menu.classList.toggle('-translate-y-4');
     menu.classList.toggle('pointer-events-none');
   });
 
-  // リンクをクリックしたら、メニューを閉じる（初期状態に戻す）
   links.forEach(link => {
     link.addEventListener('click', () => {
       menu.classList.add('opacity-0', '-translate-y-4', 'pointer-events-none');
     });
+  });
+}
+
+const observerOptions = {
+  root: null,
+  rootMargin: '0px',
+  threshold: 0.15
+};
+
+const observer = new IntersectionObserver((entries, observer) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.remove('opacity-0', 'translate-y-10');
+      entry.target.classList.add('opacity-100', 'translate-y-0');
+      
+      observer.unobserve(entry.target);
+    }
+  });
+}, observerOptions);
+
+const revealTargets = document.querySelectorAll('.reveal-target');
+revealTargets.forEach(target => {
+  observer.observe(target);
+});
+
+const contactForm = document.getElementById('contact-form');
+const submitBtn = document.getElementById('submit-btn');
+const btnText = document.getElementById('btn-text');
+const btnIcon = document.getElementById('btn-icon');
+const formSuccess = document.getElementById('form-success');
+const closeSuccessBtn = document.getElementById('close-success-btn');
+
+if (contactForm) {
+  contactForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const originalText = btnText.innerText;
+    btnText.innerText = '送信中...';
+    btnIcon.classList.add('hidden');
+    submitBtn.disabled = true;
+
+    const formData = new FormData(contactForm);
+
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        contactForm.reset();
+        formSuccess.classList.remove('hidden');
+      } else {
+        alert('送信に失敗しました。時間をおいて再度お試しください。');
+      }
+    } catch (error) {
+      alert('通信エラーが発生しました。ネットワーク環境をご確認ください。');
+    } finally {
+      btnText.innerText = originalText;
+      btnIcon.classList.remove('hidden');
+      submitBtn.disabled = false;
+    }
+  });
+}
+
+if (closeSuccessBtn) {
+  closeSuccessBtn.addEventListener('click', () => {
+    formSuccess.classList.add('hidden');
   });
 }

@@ -68,12 +68,23 @@ import profileIcon from '../img/profile_icon.png';
       </div>
     </section>
 
-    <section id="about" class="max-w-4xl mx-auto py-20 px-6 border-t border-slate-200">
+<section id="about" class="reveal-target opacity-0 translate-y-10 transition-all duration-1000 ease-out max-w-4xl mx-auto py-20 px-6 border-t border-slate-200">
       <h2 class="text-3xl font-bold mb-8 text-[#556b2f]">About Me</h2>
+      
       <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
-        <p class="text-slate-600 leading-relaxed mb-8">
-          バックエンドからインフラ、フロントエンドまで幅広く手がけるソフトウェアエンジニアです。
-          技術を通じて、使いやすく、かつ保守性の高いシステムの設計・開発を心がけています。
+        <h3 class="text-2xl font-bold text-slate-900 mb-6 flex items-center gap-3">
+          <svg class="w-6 h-6 text-[#556b2f]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+          </svg>
+          Introduction
+        </h3>
+        
+        <p class="text-slate-600 leading-relaxed mb-8 text-lg">
+          北海道出身、社会人5年目を迎えるバックエンドエンジニア。<br>
+          最近はAI駆動開発に注力しており、開発チームの生産性向上を目指し日々尽力しています。<br>
+          趣味は野球観戦、ゲーム、料理、KPOPなど、インドアのくせに多趣味なタイプです。<br>
+          もちろんファイターズファンです。<br>
+          妻が私の作ったごはんを食べている姿を見るのが生きがいです。
         </p>
         
         <div class="flex flex-wrap gap-4">
@@ -93,42 +104,165 @@ import profileIcon from '../img/profile_icon.png';
           </a>
         </div>
       </div>
+
+      <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-12">
+          
+        <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
+          <h3 class="text-2xl font-bold text-slate-900 mb-6 flex items-center gap-3">
+            <svg class="w-6 h-6 text-[#556b2f]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+            </svg>
+            Profile
+          </h3>
+          <ul class="space-y-4 text-slate-600">
+            <li class="flex border-b border-slate-50 pb-3">
+              <span class="font-semibold w-28 shrink-0 text-slate-800">生年月日</span>
+              <span>1998年 9月 29日</span>
+            </li>
+            <li class="flex border-b border-slate-50 pb-3">
+              <span class="font-semibold w-28 shrink-0 text-slate-800">出身地</span>
+              <span>北海道旭川市</span> 
+            </li>
+            <li class="flex border-b border-slate-50 pb-3">
+              <span class="font-semibold w-28 shrink-0 text-slate-800">所在地</span>
+              <span>神奈川県川崎市</span>
+            </li>
+            <li class="flex border-b border-slate-50 pb-3">
+              <span class="font-semibold w-28 shrink-0 text-slate-800">趣味</span>
+              <span>野球観戦、ゲーム、料理、KPOP、スノーボード</span>
+            </li>
+            <li class="flex border-b border-slate-50 pb-3">
+              <span class="font-semibold w-28 shrink-0 text-slate-800">好物</span>
+              <span>ラーメン、餃子、カレー、ビールに合うもの全般</span>
+            </li>
+            <li class="flex border-b border-slate-50 pb-3">
+              <span class="font-semibold w-28 shrink-0 text-slate-800">今年の抱負</span>
+              <span>筋トレで肉体改造、パン作りスキルの向上</span>
+            </li>            
+          </ul>
+        </div>
+
+        <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
+          <h3 class="text-2xl font-bold text-slate-900 mb-6 flex items-center gap-3">
+            <svg class="w-6 h-6 text-[#556b2f]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+            </svg>
+            Experience
+          </h3>
+          <div class="relative border-l-2 border-[#556b2f]/20 ml-3 space-y-8">
+            <div class="relative pl-6">
+              <div class="absolute w-4 h-4 bg-[#556b2f] rounded-full -left-[9px] top-1 border-4 border-white"></div>
+              <p class="text-sm text-[#556b2f] font-bold mb-1">2025年 5月 - 現在</p>
+              <h4 class="font-bold text-slate-900 text-lg">バックエンドエンジニア</h4>
+              <p class="text-slate-600 text-sm mt-1 leading-relaxed">
+                IT特化型人材紹介会社でバックエンドエンジニアとして勤務。<br>
+                PHPをメインに、社内システムの開発・運用を担当するだけでなく、
+                自社のプロダクト（求人サイトやLPなど）の開発・運用にも携わっています。<br>
+                またAI駆動開発による業務効率化や新機能の提案・実装も積極的に行っています。
+              </p>
+            </div>
+            <div class="relative pl-6">
+              <div class="absolute w-4 h-4 bg-slate-300 rounded-full -left-[9px] top-1 border-4 border-white"></div>
+              <p class="text-sm text-slate-500 font-bold mb-1">2022年 4月 - 2025年 4月</p>
+              <h4 class="font-bold text-slate-900 text-lg">SES</h4>
+              <p class="text-slate-600 text-sm mt-1 leading-relaxed">
+                新卒入社の会社で、客先常駐のSIerとして業界の異なる複数の現場を経験。<br>
+                システムの運用保守、システム基盤の新規構築、大規模データ移行プロジェクトなどを担当。
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </section>
 
-    <section id="skills" class="max-w-4xl mx-auto py-20 px-6 border-t border-slate-200">
+    <section id="skills" class="reveal-target opacity-0 translate-y-10 transition-all duration-1000 ease-out max-w-4xl mx-auto py-20 px-6 border-t border-slate-200">
       <h2 class="text-3xl font-bold mb-8 text-[#556b2f]">Skills</h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        
         <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
-          <h3 class="text-xl font-semibold mb-3 text-slate-800">Backend</h3>
-          <p class="text-slate-600 leading-relaxed">
-            Go, Python, Node.jsなどを利用したAPI開発、アーキテクチャ設計。
-          </p>
+          <h3 class="text-xl font-bold mb-4 text-slate-800 border-b border-slate-50 pb-2">Backend</h3>
+          <ul class="text-slate-600 leading-relaxed text-sm space-y-3">
+            <li class="flex items-start gap-2">
+              <span class="text-[#556b2f] mt-0.5">▪</span>
+              <span>PHP, Java, Python等を用いたAPI開発およびアーキテクチャ設計。</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-[#556b2f] mt-0.5">▪</span>
+              <span>技術的負債の解消を目指した<strong>リファクタリング</strong>や<strong>パフォーマンス改善</strong>に尽力。</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-[#556b2f] mt-0.5">▪</span>
+              <span><strong>PHPUnitによるテスト自動化</strong>を推進し、AI駆動開発の土台となる堅牢なコードベースを維持。</span>
+            </li>
+          </ul>
         </div>
+
         <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
-          <h3 class="text-xl font-semibold mb-3 text-slate-800">Frontend</h3>
-          <p class="text-slate-600 leading-relaxed">
-            React / Next.js / Astro を用いたモダンなUI構築。
-          </p>
+          <h3 class="text-xl font-bold mb-4 text-slate-800 border-b border-slate-50 pb-2">Frontend</h3>
+          <ul class="text-slate-600 leading-relaxed text-sm space-y-3">
+            <li class="flex items-start gap-2">
+              <span class="text-[#556b2f] mt-0.5">▪</span>
+              <span>Next.js / Astroを用いたモダンで高速なUI構築。</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-[#556b2f] mt-0.5">▪</span>
+              <span>Figma等のデザインツールを活用。副業ではUI/UXデザインも担当。</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-[#556b2f] mt-0.5">▪</span>
+              <span>再利用性と保守性を意識したコンポーネント設計の実践。</span>
+            </li>
+          </ul>
         </div>
+
         <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
-          <h3 class="text-xl font-semibold mb-3 text-slate-800">Infrastructure</h3>
-          <p class="text-slate-600 leading-relaxed">
-            AWS / GCPを用いたインフラ構築、Docker、CI/CDパイプラインの整備。
-          </p>
+          <h3 class="text-xl font-bold mb-4 text-slate-800 border-b border-slate-50 pb-2">Infrastructure</h3>
+          <ul class="text-slate-600 leading-relaxed text-sm space-y-3">
+            <li class="flex items-start gap-2">
+              <span class="text-[#556b2f] mt-0.5">▪</span>
+              <span>AWS/GCP環境における本番システムの運用保守。</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-[#556b2f] mt-0.5">▪</span>
+              <span>ターミナル操作による迅速なログ調査・原因究明や、不正アクセス等への<strong>一次対応</strong>を担当。</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-[#556b2f] mt-0.5">▪</span>
+              <span>GCP (<strong>Vertex AI</strong>) を用いた<strong>AI駆動開発の導入・運用</strong>を通じ、開発プロセスのモダナイズを推進。</span>
+            </li>
+          </ul>
         </div>
       </div>
     </section>
 
-    <section id="contact" class="max-w-4xl mx-auto py-20 px-6 border-t border-slate-200">
+    <section id="contact" class="reveal-target opacity-0 translate-y-10 transition-all duration-1000 ease-out max-w-4xl mx-auto py-20 px-6 border-t border-slate-200">
       <h2 class="text-3xl font-bold mb-8 text-[#556b2f] text-left">Contact</h2>
       
-      <div class="bg-white p-8 md:p-12 rounded-2xl shadow-sm border border-slate-100 w-full">
+      <div class="relative overflow-hidden bg-white p-8 md:p-12 rounded-2xl shadow-sm border border-slate-100 w-full">
+        
+        <div id="form-success" class="hidden absolute inset-0 bg-white/95 backdrop-blur-sm z-10 flex flex-col items-center justify-center p-8 text-center transition-opacity duration-500">
+          <div class="w-16 h-16 bg-[#556b2f]/10 text-[#556b2f] rounded-full flex items-center justify-center mb-6">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+          </div>
+          <h3 class="text-2xl font-bold text-slate-900 mb-3">送信が完了しました！</h3>
+          <p class="text-slate-600 leading-relaxed mb-8">
+            メッセージありがとうございます。<br>
+            内容を確認の上、折り返しご連絡いたします。
+          </p>
+          <button id="close-success-btn" class="text-[#556b2f] font-semibold hover:underline border-none bg-transparent cursor-pointer">
+            フォームに戻る
+          </button>
+        </div>
+
         <p class="text-slate-600 mb-10 text-left leading-relaxed">
           お仕事のご相談やカジュアルな情報交換など、お気軽にご連絡ください。<br>
           以下のフォームよりメッセージをお送りいただけます。
         </p>
 
-        <form action="https://api.web3forms.com/submit" method="POST" class="flex flex-col gap-8">
+        <form id="contact-form" action="https://api.web3forms.com/submit" method="POST" class="flex flex-col gap-8">
           <input type="hidden" name="access_key" value={import.meta.env.PUBLIC_WEB3FORMS_KEY}>
           <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
 
@@ -148,18 +282,20 @@ import profileIcon from '../img/profile_icon.png';
 
           <div class="space-y-2">
             <label for="message" class="block text-sm font-semibold text-slate-700">メッセージ</label>
-            <textarea name="message" id="message" rows="6" required placeholder="こんにちは！ポートフォリオを拝見しました..." 
+            <textarea name="message" id="message" rows="6" required placeholder="こんにちは！..." 
               class="w-full px-4 py-4 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#556b2f]/30 focus:border-[#556b2f] transition-all bg-slate-50 focus:bg-white resize-none"></textarea>
           </div>
 
           <div class="flex justify-center mt-4">
-            <button type="submit" class="w-full md:w-80 bg-[#556b2f] hover:bg-[#435525] text-white px-10 py-4 rounded-xl font-bold transition-all duration-300 shadow-md hover:shadow-lg active:scale-95 flex justify-center items-center gap-3">
-              メッセージを送信
-              <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <button id="submit-btn" type="submit" class="group w-full md:w-80 bg-[#556b2f] hover:bg-[#435525] text-white px-10 py-4 rounded-xl font-bold transition-all duration-300 shadow-md hover:shadow-lg active:scale-95 flex justify-center items-center gap-3 disabled:opacity-70 disabled:cursor-not-allowed disabled:active:scale-100">
+              <span id="btn-text">メッセージを送信</span>
+              <svg id="btn-icon" class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
               </svg>
             </button>
           </div>
+        </form>
+      </div>
     </section>
 
   </main>
