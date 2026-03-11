@@ -149,6 +149,7 @@ if (closeSuccessBtn) {
 const chatToggleBtn = document.getElementById('ai-chat-toggle');
 const chatCloseBtn = document.getElementById('ai-chat-close');
 const chatWindow = document.getElementById('ai-chat-window');
+const chatOverlay = document.getElementById('ai-chat-overlay');
 const chatForm = document.getElementById('ai-chat-form');
 const chatInput = document.getElementById('ai-chat-input');
 const chatMessages = document.getElementById('ai-chat-messages');
@@ -163,6 +164,10 @@ if (chatToggleBtn && chatWindow) {
       if (window.innerWidth >= 768) {
         chatInput.focus();
       }
+    }
+
+    if (chatOverlay) {
+      chatOverlay.classList.toggle('hidden');
     }
   };
 
