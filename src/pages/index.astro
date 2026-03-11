@@ -299,9 +299,11 @@ import '../styles/global.css';
   </main>
   <div class="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-4 font-sans">
     
-    <div id="ai-chat-overlay" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm -z-10 md:hidden cursor-pointer transition-opacity duration-300"></div>
+<div id="ai-chat-overlay" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-40 md:hidden cursor-pointer transition-opacity duration-300 opacity-0 pointer-events-none"></div>
+
+  <div class="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-4 font-sans">
     
-    <div id="ai-chat-window" class="hidden w-[90vw] sm:w-80 h-[28rem] bg-white rounded-2xl shadow-2xl border border-slate-200 flex-col overflow-hidden transition-all duration-300 origin-bottom-right">
+    <div id="ai-chat-window" class="w-[90vw] sm:w-80 h-[28rem] bg-white rounded-2xl shadow-2xl border border-slate-200 flex flex-col overflow-hidden transition-all duration-300 origin-bottom-right opacity-0 scale-90 translate-y-4 pointer-events-none">
       
       <div class="bg-[#556b2f] text-white px-4 py-3 flex justify-between items-center shadow-md z-10">
         <div class="flex items-center gap-2">

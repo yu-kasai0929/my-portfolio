@@ -157,17 +157,25 @@ const chatSubmitBtn = document.getElementById('ai-chat-submit');
 
 if (chatToggleBtn && chatWindow) {
   // チャットウィンドウの開閉
-  const toggleChat = () => {
-    chatWindow.classList.toggle('hidden');
-    chatWindow.classList.toggle('flex');
-    if (!chatWindow.classList.contains('hidden')) {
+const toggleChat = () => {
+    chatWindow.classList.toggle('opacity-0');
+    chatWindow.classList.toggle('scale-90');
+    chatWindow.classList.toggle('translate-y-4');
+    chatWindow.classList.toggle('pointer-events-none');
+    
+    if (chatOverlay) {
+      chatOverlay.classList.toggle('opacity-0');
+      chatOverlay.classList.toggle('pointer-events-none');
+    }
+    
+    if (chatWindow.classList.contains('opacity-0')) {
+      chatToggleBtn.classList.add('is-pulsing');
+    } else {
+      chatToggleBtn.classList.remove('is-pulsing');
+      
       if (window.innerWidth >= 768) {
         chatInput.focus();
       }
-    }
-
-    if (chatOverlay) {
-      chatOverlay.classList.toggle('hidden');
     }
   };
 
