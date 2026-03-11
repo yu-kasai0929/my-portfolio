@@ -29,10 +29,6 @@
   }
 }
 
-.is-pulsing {
-  position: relative;
-}
-
 .is-pulsing::before,
 .is-pulsing::after {
   content: '';
