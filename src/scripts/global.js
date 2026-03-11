@@ -144,9 +144,8 @@ if (closeSuccessBtn) {
   });
 }
 
-// ==========================================
-// 4. AIアシスタント チャット機能
-// ==========================================
+
+// AIアシスタント チャット機能
 const chatToggleBtn = document.getElementById('ai-chat-toggle');
 const chatCloseBtn = document.getElementById('ai-chat-close');
 const chatWindow = document.getElementById('ai-chat-window');
@@ -239,10 +238,11 @@ if (chatToggleBtn && chatWindow) {
       document.getElementById(loadingId).remove();
       appendMessage('通信エラーが発生しました。ネットワーク環境をご確認ください。', false);
     } finally {
-      // 6. ブロックを解除して次の入力を待つ
       chatInput.disabled = false;
       chatSubmitBtn.disabled = false;
-      chatInput.focus();
+      if (window.innerWidth >= 768) {
+        chatInput.focus();
+      }
     }
   });
 }
