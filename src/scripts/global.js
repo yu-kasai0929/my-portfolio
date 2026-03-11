@@ -143,3 +143,106 @@ if (closeSuccessBtn) {
     formSuccess.classList.add('hidden');
   });
 }
+
+// ==========================================
+// 4. AIアシスタント チャット機能
+// ==========================================
+const chatToggleBtn = document.getElementById('ai-chat-toggle');
+const chatCloseBtn = document.getElementById('ai-chat-close');
+const chatWindow = document.getElementById('ai-chat-window');
+const chatForm = document.getElementById('ai-chat-form');
+const chatInput = document.getElementById('ai-chat-input');
+const chatMessages = document.getElementById('ai-chat-messages');
+const chatSubmitBtn = document.getElementById('ai-chat-submit');
+
+if (chatToggleBtn && chatWindow) {
+  // チャットウィンドウの開閉
+  const toggleChat = () => {
+    chatWindow.classList.toggle('hidden');
+    chatWindow.classList.toggle('flex');
+    if (!chatWindow.classList.contains('hidden')) {
+      chatInput.focus();
+    }
+  };
+
+  chatToggleBtn.addEventListener('click', toggleChat);
+  chatCloseBtn.addEventListener('click', toggleChat);
+
+  // 画面に吹き出しを追加する関数
+  const appendMessage = (text, isUser) => {
+    const msgDiv = document.createElement('div');
+    msgDiv.className = `flex ${isUser ? 'justify-end' : 'justify-start'}`;
+    
+    const bubble = document.createElement('div');
+    bubble.className = `px-4 py-2 text-sm max-w-[85%] shadow-sm leading-relaxed ${
+      isUser 
+        ? 'bg-[#556b2f] text-white rounded-2xl rounded-tr-sm' 
+        : 'bg-white border border-slate-200 text-slate-700 rounded-2xl rounded-tl-sm'
+    }`;
+    bubble.innerHTML = text.replace(/\n/g, '<br>'); // 改行を<br>タグに変換
+    
+    msgDiv.appendChild(bubble);
+    chatMessages.appendChild(msgDiv);
+    
+    // 一番下まで自動スクロール
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  };
+
+  // メッセージ送信（APIとの通信）
+  chatForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const message = chatInput.value.trim();
+    if (!message) return;
+
+    // 1. ユーザーの入力を画面に表示して、入力欄を空にする
+    appendMessage(message, true);
+    chatInput.value = '';
+    
+    // 2. 通信中はボタンと入力をブロック
+    chatInput.disabled = true;
+    chatSubmitBtn.disabled = true;
+
+    // 3. AIが考え中（タイピング風アニメーション）を表示
+    const loadingId = 'loading-' + Date.now();
+    const loadingDiv = document.createElement('div');
+    loadingDiv.id = loadingId;
+    loadingDiv.className = 'flex justify-start';
+    loadingDiv.innerHTML = `
+      <div class="bg-white border border-slate-200 text-slate-400 rounded-2xl rounded-tl-sm px-4 py-3 shadow-sm flex items-center gap-1">
+        <div class="w-2 h-2 bg-slate-400 rounded-full animate-pulse"></div>
+        <div class="w-2 h-2 bg-slate-400 rounded-full animate-pulse" style="animation-delay: 0.2s"></div>
+        <div class="w-2 h-2 bg-slate-400 rounded-full animate-pulse" style="animation-delay: 0.4s"></div>
+      </div>`;
+    chatMessages.appendChild(loadingDiv);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+
+    try {
+      // 4. 先ほど作ったAPI（Vertex AI）へリクエストを投げる
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: message })
+      });
+
+      const data = await response.json();
+      
+      // 考え中アニメーションを消す
+      document.getElementById(loadingId).remove();
+
+      if (response.ok && data.reply) {
+        // 5. AIからの回答を画面に表示！
+        appendMessage(data.reply, false);
+      } else {
+        appendMessage('申し訳ありません、エラーが発生しました。（APIの設定をご確認ください）', false);
+      }
+    } catch (error) {
+      document.getElementById(loadingId).remove();
+      appendMessage('通信エラーが発生しました。ネットワーク環境をご確認ください。', false);
+    } finally {
+      // 6. ブロックを解除して次の入力を待つ
+      chatInput.disabled = false;
+      chatSubmitBtn.disabled = false;
+      chatInput.focus();
+    }
+  });
+}

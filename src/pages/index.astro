@@ -299,6 +299,42 @@ import profileIcon from '../img/profile_icon.png';
     </section>
 
   </main>
+  <div class="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-4 font-sans">
+    
+    <div id="ai-chat-window" class="hidden w-[90vw] sm:w-80 h-[28rem] bg-white rounded-2xl shadow-2xl border border-slate-200 flex-col overflow-hidden transition-all duration-300 origin-bottom-right">
+      
+      <div class="bg-[#556b2f] text-white px-4 py-3 flex justify-between items-center shadow-md z-10">
+        <div class="flex items-center gap-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+          <span class="font-bold text-sm">AI Yu Kasai</span>
+        </div>
+        <button id="ai-chat-close" class="text-white/80 hover:text-white hover:bg-white/10 rounded-full p-1 transition-colors">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+      </div>
+      
+      <div id="ai-chat-messages" class="flex-1 overflow-y-auto p-4 bg-slate-50 space-y-4">
+        <div class="flex justify-start">
+          <div class="bg-white border border-slate-200 text-slate-700 rounded-2xl rounded-tl-sm px-4 py-2 text-sm max-w-[85%] shadow-sm leading-relaxed">
+            こんにちは！葛西のAIアシスタントです。<br>何でも聞いてください！
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white border-t border-slate-200 p-3">
+        <form id="ai-chat-form" class="flex gap-2">
+          <input type="text" id="ai-chat-input" placeholder="質問を入力..." class="flex-1 px-4 py-2 bg-slate-100 border-transparent focus:bg-white focus:border-[#556b2f] focus:ring-2 focus:ring-[#556b2f]/20 rounded-xl text-sm transition-all outline-none" required autocomplete="off">
+          <button type="submit" id="ai-chat-submit" class="bg-[#556b2f] hover:bg-[#435525] text-white p-2 rounded-xl transition-colors disabled:opacity-50 flex items-center justify-center shrink-0">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <button id="ai-chat-toggle" class="bg-[#556b2f] hover:bg-[#435525] text-white w-14 h-14 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center hover:scale-110 active:scale-95 group">
+      <svg class="w-6 h-6 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
+    </button>
+  </div>
 </Layout>
 
 <script src="../scripts/global.js"></script>
