@@ -16,7 +16,43 @@ export const POST = async ({ request }) => {
     const location = import.meta.env.DIALOGFLOW_LOCATION;
     const agentId = import.meta.env.DIALOGFLOW_AGENT_ID;
     const clientEmail = import.meta.env.GCP_CLIENT_EMAIL;
-    const privateKeyRaw = import.meta.env.GCP_PRIVATE_KEY;
+    
+    // 秘密鍵の取得と前処理（Vercel環境変数設定の問題に対応）
+    let privateKeyRaw = import.meta.env.GCP_PRIVATE_KEY;
+    
+    // ダブルクォートと他の環境変数を除去
+    if (privateKeyRaw) {
+      // 先頭と末尾のダブルクォートを除去
+      if (privateKeyRaw.startsWith('"') && privateKeyRaw.includes('"', 1)) {
+        const endQuoteIndex = privateKeyRaw.indexOf('"', 1);
+        privateKeyRaw = privateKeyRaw.substring(1, endQuoteIndex);
+      }
+      
+      // 他の環境変数が混入している場合の対応
+      if (privateKeyRaw.includes('\nDIALOGFLOW_LOCATION=') || 
+          privateKeyRaw.includes('\nGCP_') || 
+          privateKeyRaw.includes('\nPROJECT_ID=')) {
+        const lines = privateKeyRaw.split('\n');
+        const keyLines = [];
+        let inKey = false;
+        
+        for (const line of lines) {
+          if (line.trim().startsWith('-----BEGIN PRIVATE KEY-----')) {
+            inKey = true;
+          }
+          if (inKey) {
+            keyLines.push(line);
+          }
+          if (line.trim().startsWith('-----END PRIVATE KEY-----')) {
+            break;
+          }
+          if (line.includes('=') && !inKey) {
+            break; // 他の環境変数が見つかった場合は終了
+          }
+        }
+        privateKeyRaw = keyLines.join('\n');
+      }
+    }
 
     // 必要な環境変数が設定されているかチェック
     if (!projectId || !location || !agentId || !clientEmail || !privateKeyRaw) {
