@@ -33,30 +33,115 @@ export const POST = async ({ request }) => {
     // 秘密鍵の処理を改善
     let privateKey;
     try {
-      // 改行文字の置換を複数の方法で試行
-      privateKey = privateKeyRaw
-        .replace(/\\n/g, '\n')  // エスケープされた改行を実際の改行に変換
-        .replace(/\s+$/, '')    // 末尾の空白文字を削除
-        .trim();                // 前後の空白を削除
+      // 秘密鍵の診断情報をログ出力（本番デバッグ用）
+      console.log('Private key diagnosis:', {
+        length: privateKeyRaw.length,
+        startsWithBegin: privateKeyRaw.startsWith('-----BEGIN'),
+        endsWithEnd: privateKeyRaw.endsWith('-----'),
+        containsEscapedNewlines: privateKeyRaw.includes('\\n'),
+        containsRealNewlines: privateKeyRaw.includes('\n'),
+        firstChars: privateKeyRaw.substring(0, 50),
+        lastChars: privateKeyRaw.substring(privateKeyRaw.length - 50)
+      });
 
-      // 秘密鍵の基本的な形式チェック
-      if (!privateKey.includes('-----BEGIN PRIVATE KEY-----') || 
-          !privateKey.includes('-----END PRIVATE KEY-----')) {
-        throw new Error('Invalid private key format');
+      // 複数の処理方法を試行
+      let processedKeys = [];
+      
+      // 方法1: 標準的なエスケープ解除
+      processedKeys.push({
+        method: 'standard',
+        key: privateKeyRaw
+          .replace(/\\n/g, '\n')
+          .replace(/\s+$/, '')
+          .trim()
+      });
+
+      // 方法2: より厳密な置換
+      processedKeys.push({
+        method: 'strict',
+        key: privateKeyRaw
+          .replace(/\\\\n/g, '\n')  // ダブルエスケープ対応
+          .replace(/\\n/g, '\n')
+          .replace(/\r\n/g, '\n')   // Windows改行対応
+          .replace(/\r/g, '\n')     // Mac改行対応
+          .trim()
+      });
+
+      // 方法3: Base64デコード試行（もし秘密鍵がBase64エンコードされている場合）
+      if (!privateKeyRaw.includes('-----BEGIN') && privateKeyRaw.length > 100) {
+        try {
+          const decoded = Buffer.from(privateKeyRaw, 'base64').toString('utf8');
+          if (decoded.includes('-----BEGIN PRIVATE KEY-----')) {
+            processedKeys.push({
+              method: 'base64decoded',
+              key: decoded.trim()
+            });
+          }
+        } catch (base64Error) {
+          console.log('Base64 decode attempt failed:', base64Error.message);
+        }
       }
+
+      // 各処理方法で形式チェック
+      let validKey = null;
+      for (const processed of processedKeys) {
+        if (processed.key.includes('-----BEGIN PRIVATE KEY-----') && 
+            processed.key.includes('-----END PRIVATE KEY-----')) {
+          
+          // PEM形式の基本検証
+          const lines = processed.key.split('\n');
+          if (lines.length >= 3 && 
+              lines[0].trim() === '-----BEGIN PRIVATE KEY-----' &&
+              lines[lines.length - 1].trim() === '-----END PRIVATE KEY-----') {
+            validKey = processed;
+            break;
+          }
+        }
+      }
+
+      if (!validKey) {
+        throw new Error(`Invalid private key format after all processing methods. Tried: ${processedKeys.map(p => p.method).join(', ')}`);
+      }
+
+      privateKey = validKey.key;
+      console.log(`Private key successfully processed using method: ${validKey.method}`);
+
     } catch (keyError) {
-      console.error('Private key processing error:', keyError.message);
+      console.error('Private key processing error:', {
+        message: keyError.message,
+        originalKeyLength: privateKeyRaw?.length,
+        originalKeyStart: privateKeyRaw?.substring(0, 100)
+      });
       return new Response(JSON.stringify({ error: '認証情報の処理に失敗しました。' }), { status: 500 });
     }
 
     // 2. Dialogflow CX クライアントの初期化
-    const client = new SessionsClient({
-      apiEndpoint: `${location}-dialogflow.googleapis.com`,
-      credentials: {
-        client_email: clientEmail,
-        private_key: privateKey,
-      }
-    });
+    let client;
+    try {
+      console.log('Initializing Dialogflow CX client with config:', {
+        apiEndpoint: `${location}-dialogflow.googleapis.com`,
+        hasClientEmail: !!clientEmail,
+        hasPrivateKey: !!privateKey,
+        privateKeyLength: privateKey.length
+      });
+
+      client = new SessionsClient({
+        apiEndpoint: `${location}-dialogflow.googleapis.com`,
+        credentials: {
+          client_email: clientEmail,
+          private_key: privateKey,
+        }
+      });
+
+      console.log('Dialogflow CX client initialized successfully');
+    } catch (clientError) {
+      console.error('Client initialization failed:', {
+        message: clientError.message,
+        stack: clientError.stack,
+        name: clientError.name
+      });
+      return new Response(JSON.stringify({ error: 'AIサービスの初期化に失敗しました。' }), { status: 500 });
+    }
 
     // 3. セッションパスの生成
     const sessionPath = client.projectLocationAgentSessionPath(
