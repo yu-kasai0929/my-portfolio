@@ -56,7 +56,7 @@ export const POST = async ({ request }) => {
           .trim()
       });
 
-      // 方法2: より厳密な置換
+      // 方法2: より厳密な置換 
       processedKeys.push({
         method: 'strict',
         key: privateKeyRaw
