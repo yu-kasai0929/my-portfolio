@@ -160,7 +160,9 @@ if (chatToggleBtn && chatWindow) {
     chatWindow.classList.toggle('hidden');
     chatWindow.classList.toggle('flex');
     if (!chatWindow.classList.contains('hidden')) {
-      chatInput.focus();
+      if (window.innerWidth >= 768) {
+        chatInput.focus();
+      }
     }
   };
 
