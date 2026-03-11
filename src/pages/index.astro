@@ -1,8 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import '../styles/global.css';
-import { Image } from 'astro:assets';
-import profileIcon from '../img/profile_icon.png';
 ---
 
 <Layout title="Yu Kasai | Portfolio">
@@ -10,8 +8,8 @@ import profileIcon from '../img/profile_icon.png';
       <div class="max-w-4xl mx-auto px-6 py-3 flex justify-between items-center">
         
         <a href="#home" class="flex items-center group">
-          <Image 
-            src={profileIcon} 
+          <img 
+            src="profile_icon.png" 
             alt="Yu Kasai Profile Icon" 
             class="h-12 w-12 rounded-full border-2 border-[#556b2f] object-cover shadow-sm group-hover:scale-105 transition-transform duration-300"
           />
@@ -45,8 +43,8 @@ import profileIcon from '../img/profile_icon.png';
     
     <section id="home" class="min-h-screen flex flex-col items-center justify-center py-20 text-center px-4 -mt-16">
       
-      <Image 
-        src={profileIcon} 
+      <img 
+            src="profile_icon.png" 
         alt="Yu Kasai Profile" 
         class="w-40 h-40 md:w-48 md:h-48 rounded-full border-4 border-white shadow-xl object-cover mb-8 ring-4 ring-[#556b2f]/20 animate-fade-in-up"
       />
