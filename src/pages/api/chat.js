@@ -21,7 +21,7 @@ export const POST = async ({ request }) => {
       apiEndpoint: `${location}-dialogflow.googleapis.com`,
       credentials: {
         client_email: import.meta.env.GCP_CLIENT_EMAIL,
-        private_key: import.meta.env.GCP_PRIVATE_KEY.replace(/\\n/g, '\n'),
+        private_key: import.meta.env.GCP_PRIVATE_KEY.split(String.raw`\n`).join('\n'),
       }
     });
 
