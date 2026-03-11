@@ -69,16 +69,6 @@ export const POST = async ({ request }) => {
     // 秘密鍵の処理を改善
     let privateKey;
     try {
-      // 秘密鍵の診断情報をログ出力（本番デバッグ用）
-      console.log('Private key diagnosis:', {
-        length: privateKeyRaw.length,
-        startsWithBegin: privateKeyRaw.startsWith('-----BEGIN'),
-        endsWithEnd: privateKeyRaw.endsWith('-----'),
-        containsEscapedNewlines: privateKeyRaw.includes('\\n'),
-        containsRealNewlines: privateKeyRaw.includes('\n'),
-        firstChars: privateKeyRaw.substring(0, 50),
-        lastChars: privateKeyRaw.substring(privateKeyRaw.length - 50)
-      });
 
       // 複数の処理方法を試行
       let processedKeys = [];
@@ -140,7 +130,6 @@ export const POST = async ({ request }) => {
       }
 
       privateKey = validKey.key;
-      console.log(`Private key successfully processed using method: ${validKey.method}`);
 
     } catch (keyError) {
       console.error('Private key processing error:', {
@@ -154,13 +143,6 @@ export const POST = async ({ request }) => {
     // 2. Dialogflow CX クライアントの初期化
     let client;
     try {
-      console.log('Initializing Dialogflow CX client with config:', {
-        apiEndpoint: `${location}-dialogflow.googleapis.com`,
-        hasClientEmail: !!clientEmail,
-        hasPrivateKey: !!privateKey,
-        privateKeyLength: privateKey.length
-      });
-
       client = new SessionsClient({
         apiEndpoint: `${location}-dialogflow.googleapis.com`,
         credentials: {
@@ -169,7 +151,6 @@ export const POST = async ({ request }) => {
         }
       });
 
-      console.log('Dialogflow CX client initialized successfully');
     } catch (clientError) {
       console.error('Client initialization failed:', {
         message: clientError.message,
